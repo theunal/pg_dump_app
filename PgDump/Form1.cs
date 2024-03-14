@@ -1,4 +1,6 @@
 using System.Management.Automation;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
+using System.Net.Sockets;
 
 namespace PgDump
 {
@@ -11,6 +13,11 @@ namespace PgDump
 
         private async void btn_create_schema_Click(object sender, EventArgs e) => await RunTask("--encoding=utf8 --format=plain -s", "schema");
         private async void btn_create_data_Click(object sender, EventArgs e) => await RunTask("--data-only --encoding=utf8 --format=plain --inserts", "data");
+
+        // create db
+        // docker exec -i postgres2 psql -U postgres -c "CREATE DATABASE BranchDb;" && docker exec -i postgres2 psql -U postgres -c "\q"
+        // docker cp C:\Users\UNAL\Desktop\db\BranchDb.schema.sql postgres2:/tmp/schema.sql
+        // docker exec -i postgres2 psql -U postgres -d BranchDb -a -f /tmp/schema.sql
         private async Task RunTask(string command_arguments, string type)
         {
             (type == "schema" ? btn_create_schema : btn_create_data).Enabled = false;
