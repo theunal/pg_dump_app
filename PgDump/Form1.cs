@@ -1,64 +1,99 @@
 using System.Management.Automation;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
-using System.Net.Sockets;
 
-namespace PgDump
+namespace PgDump;
+
+public partial class Form1 : Form
 {
-    public partial class Form1 : Form
+    public Form1()
     {
-        public Form1()
+        InitializeComponent();
+    }
+
+    private async void btn_create_schema_Click(object sender, EventArgs e) => await RunTask("--encoding=utf8 --format=plain -s", "schema", true);
+    private async void btn_create_data_Click(object sender, EventArgs e) => await RunTask("--data-only --encoding=utf8 --format=plain --inserts", "data", true);
+
+    private async void btn_create_schema_Click_1(object sender, EventArgs e) => await RunTask("--encoding=utf8 --format=plain -s", "schema", false);
+    private async void btn_create_data_Click_1(object sender, EventArgs e) => await RunTask("--data-only --encoding=utf8 --format=plain --inserts", "data", false);
+
+    // create db
+    // docker exec -i postgres2 psql -U postgres -c "CREATE DATABASE BranchDb;" && docker exec -i postgres2 psql -U postgres -c "\q"
+    // docker cp C:\Users\UNAL\Desktop\db\BranchDb.schema.sql postgres2:/tmp/schema.sql
+    // docker exec -i postgres2 psql -U postgres -d BranchDb -a -f /tmp/schema.sql
+
+    private async Task RunTask(string command_arguments, string type, bool isDocker)
+    {
+        if (string.IsNullOrEmpty(txt_dbnames.Text)) return;
+
+        try
         {
-            InitializeComponent();
-        }
-
-        private async void btn_create_schema_Click(object sender, EventArgs e) => await RunTask("--encoding=utf8 --format=plain -s", "schema");
-        private async void btn_create_data_Click(object sender, EventArgs e) => await RunTask("--data-only --encoding=utf8 --format=plain --inserts", "data");
-
-        // create db
-        // docker exec -i postgres2 psql -U postgres -c "CREATE DATABASE BranchDb;" && docker exec -i postgres2 psql -U postgres -c "\q"
-        // docker cp C:\Users\UNAL\Desktop\db\BranchDb.schema.sql postgres2:/tmp/schema.sql
-        // docker exec -i postgres2 psql -U postgres -d BranchDb -a -f /tmp/schema.sql
-        private async Task RunTask(string command_arguments, string type)
-        {
-            (type == "schema" ? btn_create_schema : btn_create_data).Enabled = false;
-
+            (type == "schema" ? btn_create_schema_with_docker : btn_create_data_with_docker).Enabled = false;
             var db_names = txt_dbnames.Text.Split(' ').Select(x => x.Trim()).Where(x => string.IsNullOrEmpty(x) is false);
-
             var percentage_part = 100 / db_names.Count();
 
-            foreach (var db_name in db_names)
+            var desktop_path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+            var sql_folder = Path.Combine(desktop_path, "db");
+
+            if (Directory.Exists(sql_folder) is false) Directory.CreateDirectory(sql_folder);
+
+            if (isDocker)
             {
-                var desktop_path = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-                var sql_folder = Path.Combine(desktop_path, "db");
+                foreach (var db_name in db_names)
+                {
+                    var file_path = Path.Combine(sql_folder, $"docker.{db_name}.{type}.sql");
+                    var command = $"docker exec {container_name.Text.Trim()} pg_dump -h {host.Text.Trim()} -U {username.Text.Trim()} {command_arguments} {db_name} > {file_path}";
+                    await RunCommand(command);
 
-                if (Directory.Exists(sql_folder) is false) Directory.CreateDirectory(sql_folder);
-
-                var file_path = Path.Combine(sql_folder, $"{db_name}.{type}.sql");
-                var command = $"docker exec {txt_container_name.Text.Trim()} pg_dump -h {txt_host.Text.Trim()} -U {txt_username.Text.Trim()} {command_arguments} {db_name} > {file_path}";
-                await RunCommand(command);
-
-                var file_check = File.Exists(file_path);
-                if (file_check)
-                    (type == "schema" ? listBox1.Items : listBox2.Items).Add($"Created {Path.GetFileName(file_path)}");
-
-                (type == "schema" ? progressBar1 : progressBar2).Value += percentage_part;
+                    WriteLog(file_path, type, percentage_part);
+                }
             }
+            else
+            {
+                foreach (var db_name in db_names)
+                {
+                    var file_path = Path.Combine(sql_folder, $"{db_name}.{type}.sql");
+                    string pg_dump_path = Path.Combine(Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\")), "pg_files", "pg_dump.exe");
 
-            (type == "schema" ? progressBar1 : progressBar2).Value = 100;
-            (type == "schema" ? btn_create_schema : btn_create_data).Enabled = true;
+                    var base_command = $"$env:PGPASSWORD = \"{password.Text.Trim()}\"; & \"{pg_dump_path}\" -h {host.Text.Trim()} -U {username.Text.Trim()} {command_arguments} {db_name}";
+                    var command = type == "schema" ? $"{base_command} | Out-File -FilePath \"{file_path}\"" : $"{base_command} > {file_path}";
+                    await RunCommand(command);
+
+                    WriteLog(file_path, type, percentage_part);
+                }
+            }
         }
-        private async Task RunCommand(string command)
+        catch (Exception e)
         {
-            try
-            {
-                var ps = PowerShell.Create();
-                ps.AddScript(command);
-                await ps.InvokeAsync();
-            }
-            catch (Exception e)
-            {
-                $"{e.Message} {e.InnerException}".Split('\n').ToList().ForEach(item => listBox1.Items.Add(item));
-            }
+            throw;
+        }
+
+        (type == "schema" ? progressBar1 : progressBar2).Value = 100;
+        (type == "schema" ? btn_create_schema_with_docker : btn_create_data_with_docker).Enabled = true;
+    }
+
+
+    private void WriteLog(string file_path, string type, int percentage_part)
+    {
+        var file_check = File.Exists(file_path);
+        if (file_check)
+            (type == "schema" ? listBox1.Items : listBox2.Items).Add($"Created {Path.GetFileName(file_path)}");
+
+        if (percentage_part == 100)
+            (type == "schema" ? progressBar1 : progressBar2).Value = 100;
+        else
+            (type == "schema" ? progressBar1 : progressBar2).Value += percentage_part;
+    }
+
+    private async Task RunCommand(string command)
+    {
+        try
+        {
+            var ps = PowerShell.Create();
+            ps.AddScript(command);
+            await ps.InvokeAsync();
+        }
+        catch (Exception e)
+        {
+            $"{e.Message} {e.InnerException}".Split('\n').ToList().ForEach(item => listBox1.Items.Add(item));
         }
     }
 }
