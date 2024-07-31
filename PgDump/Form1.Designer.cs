@@ -48,6 +48,10 @@ namespace PgDump
             btn_create_schema = new Button();
             label2 = new Label();
             password = new TextBox();
+            label3 = new Label();
+            txt_tablenames = new TextBox();
+            label4 = new Label();
+            txt_schema_name = new TextBox();
             SuspendLayout();
             // 
             // btn_create_schema_with_docker
@@ -64,7 +68,7 @@ namespace PgDump
             // 
             txt_dbnames.Location = new Point(13, 43);
             txt_dbnames.Name = "txt_dbnames";
-            txt_dbnames.Size = new Size(676, 27);
+            txt_dbnames.Size = new Size(266, 27);
             txt_dbnames.TabIndex = 9;
             // 
             // label1
@@ -208,11 +212,48 @@ namespace PgDump
             password.TabIndex = 31;
             password.UseSystemPasswordChar = true;
             // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(288, 20);
+            label3.Name = "label3";
+            label3.Size = new Size(101, 20);
+            label3.TabIndex = 34;
+            label3.Text = "Table name(s)";
+            // 
+            // txt_tablenames
+            // 
+            txt_tablenames.Location = new Point(288, 43);
+            txt_tablenames.Name = "txt_tablenames";
+            txt_tablenames.Size = new Size(239, 27);
+            txt_tablenames.TabIndex = 33;
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(533, 20);
+            label4.Name = "label4";
+            label4.Size = new Size(105, 20);
+            label4.TabIndex = 36;
+            label4.Text = "Schema Name";
+            // 
+            // txt_schema_name
+            // 
+            txt_schema_name.Location = new Point(533, 43);
+            txt_schema_name.Name = "txt_schema_name";
+            txt_schema_name.Size = new Size(159, 27);
+            txt_schema_name.TabIndex = 35;
+            txt_schema_name.Text = "public";
+            // 
             // Form1
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(835, 395);
+            Controls.Add(label4);
+            Controls.Add(txt_schema_name);
+            Controls.Add(label3);
+            Controls.Add(txt_tablenames);
             Controls.Add(label2);
             Controls.Add(password);
             Controls.Add(btn_create_data);
@@ -260,5 +301,9 @@ namespace PgDump
         private Button btn_create_schema;
         private Label label2;
         private TextBox password;
+        private Label label3;
+        private TextBox txt_tablenames;
+        private Label label4;
+        private TextBox txt_schema_name;
     }
 }

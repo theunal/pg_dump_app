@@ -5,6 +5,10 @@
     {
       "AbsoluteMoniker": "D:0:0:{895ECB6D-18A1-4D71-96C2-D421BC289F4A}|PgDump\\PgDump.csproj|c:\\users\\yusuf\\desktop\\pg_dump_app\\pgdump\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{895ECB6D-18A1-4D71-96C2-D421BC289F4A}|PgDump\\PgDump.csproj|solutionrelative:pgdump\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{895ECB6D-18A1-4D71-96C2-D421BC289F4A}|PgDump\\PgDump.csproj|c:\\users\\yusuf\\desktop\\pg_dump_app\\pgdump\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "RelativeMoniker": "D:0:0:{895ECB6D-18A1-4D71-96C2-D421BC289F4A}|PgDump\\PgDump.csproj|solutionrelative:pgdump\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
   "DocumentGroupContainers": [
@@ -14,8 +18,20 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 0,
+          "SelectedChildIndex": 1,
           "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Form1.cs [Design]",
+              "DocumentMoniker": "C:\\Users\\YUSUF\\Desktop\\pg_dump_app\\PgDump\\Form1.cs",
+              "RelativeDocumentMoniker": "PgDump\\Form1.cs",
+              "ToolTip": "C:\\Users\\YUSUF\\Desktop\\pg_dump_app\\PgDump\\Form1.cs [Design]",
+              "RelativeToolTip": "PgDump\\Form1.cs [Design]",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-07-31T21:28:06.257Z",
+              "EditorCaption": " [Design]"
+            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -24,9 +40,9 @@
               "RelativeDocumentMoniker": "PgDump\\Form1.cs",
               "ToolTip": "C:\\Users\\YUSUF\\Desktop\\pg_dump_app\\PgDump\\Form1.cs",
               "RelativeToolTip": "PgDump\\Form1.cs",
-              "ViewState": "AQIAACsAAAAAAAAAAAAMwDwAAAAAAAAA",
+              "ViewState": "AQIAADQAAAAAAAAAAAAUwE0AAAAVAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2024-07-31T15:54:58.852Z",
+              "WhenOpened": "2024-07-31T20:59:38.291Z",
               "EditorCaption": ""
             }
           ]
