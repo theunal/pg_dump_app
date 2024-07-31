@@ -1,4 +1,5 @@
 using System.Management.Automation;
+using System.Reflection;
 
 namespace PgDump;
 
@@ -51,10 +52,13 @@ public partial class Form1 : Form
                 foreach (var db_name in db_names)
                 {
                     var file_path = Path.Combine(sql_folder, $"{db_name}.{type}.sql");
-                    string pg_dump_path = Path.Combine(Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\")), "pg_files", "pg_dump.exe");
+                    string pg_dump_path =
+                        //Path.Combine(Path.GetFullPath(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\..\")), "pg_files", "pg_dump.exe");
+                        Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "pg_files", "pg_dump.exe");
 
                     var base_command = $"$env:PGPASSWORD = \"{password.Text.Trim()}\"; & \"{pg_dump_path}\" -h {host.Text.Trim()} -U {username.Text.Trim()} {command_arguments} {db_name}";
                     var command = type == "schema" ? $"{base_command} | Out-File -FilePath \"{file_path}\"" : $"{base_command} > {file_path}";
+
                     await RunCommand(command);
 
                     WriteLog(file_path, type, percentage_part);
@@ -95,5 +99,15 @@ public partial class Form1 : Form
         {
             $"{e.Message} {e.InnerException}".Split('\n').ToList().ForEach(item => listBox1.Items.Add(item));
         }
+    }
+
+    private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        Clipboard.SetText(listBox2.Text);
+    }
+
+    private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
+    {
+        Clipboard.SetText(listBox1.Text);
     }
 }

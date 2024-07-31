@@ -83,6 +83,7 @@ namespace PgDump
             listBox1.Name = "listBox1";
             listBox1.Size = new Size(395, 144);
             listBox1.TabIndex = 11;
+            listBox1.SelectedIndexChanged += listBox1_SelectedIndexChanged;
             // 
             // progressBar1
             // 
@@ -103,11 +104,14 @@ namespace PgDump
             // 
             // listBox2
             // 
+            listBox2.AutoScrollOffset = new Point(408, 0);
             listBox2.FormattingEnabled = true;
             listBox2.Location = new Point(415, 237);
             listBox2.Name = "listBox2";
+            listBox2.ScrollAlwaysVisible = true;
             listBox2.Size = new Size(408, 144);
             listBox2.TabIndex = 21;
+            listBox2.SelectedIndexChanged += listBox2_SelectedIndexChanged;
             // 
             // progressBar2
             // 
@@ -202,6 +206,7 @@ namespace PgDump
             password.Name = "password";
             password.Size = new Size(125, 27);
             password.TabIndex = 31;
+            password.UseSystemPasswordChar = true;
             // 
             // Form1
             // 
