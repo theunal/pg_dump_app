@@ -72,8 +72,9 @@ public partial class Form1 : Form
                         {
                             var new_file_path = file_path.Replace(".sql", $".{table_name}.sql");
                             var file_name_text = @"\" + "\"" + table_name + @"\" + "\"";
-                            // 'public.\"AgentSshApps\"' 
-                            await RunCommand(type == "schema" ? "" : command.Replace($"{db_name} >", $"-t '{txt_schema_name.Text.Trim()}.{file_name_text}' {db_name} >").Replace(file_path, new_file_path));
+                            //await RunCommand(type == "schema" ? "" : command.Replace($"{db_name} >", $"-t '{txt_schema_name.Text.Trim()}.{file_name_text}' {db_name} >").Replace(file_path, new_file_path));
+
+                            listBox2.Items.Add(type == "schema" ? "" : command.Replace($"{db_name} >", $"-t '{txt_schema_name.Text.Trim()}.{file_name_text}' {db_name} >").Replace(file_path, new_file_path));
                         }
                     }
                     else

@@ -1,0 +1,14 @@
+$env:PGPASSWORD = 'password';
+
+// şema
+C:\Users\YUSUF\Desktop\PgDump\pg_files\pg_dump.exe -h localhost -U postgres --encoding=utf8 --format=plain -s testdb | Out-File -FilePath "C:\Users\YUSUF\Desktop\db\testdb.schema.sql"
+
+// text sql file
+C:\Users\YUSUF\Desktop\PgDump\pg_files\pg_dump.exe -h localhost -U postgres --data-only --encoding=utf8 --format=plain --inserts -t 'public.\"table1\"' testdb > C:\Users\YUSUF\Desktop\db\testdb.data.table1.sql
+
+// tar sql file
+C:\Users\YUSUF\Desktop\PgDump\pg_files\pg_dump.exe --file "C:\Users\YUSUF\Desktop\db\testdb.table1.sql" --host "localhost" --port "5432" --username "postgres" --format=t --encoding "UTF8" --data-only --inserts --verbose --table 'public.\"table1\"' testdb
+C:\Users\YUSUF\Desktop\PgDump\pg_files\pg_dump.exe --file "C:\Users\YUSUF\Desktop\db\testdb.table1.sql" --host "localhost" --port "5432" --username "postgres" --format=t --encoding "UTF8" --data-only --inserts --verbose --table 'public.\"table1\"' testdb
+
+// restore tar file
+C:\Users\YUSUF\Desktop\PgDump\pg_files\pg_restore.exe --host "localhost" --port "5432" --username "postgres" --dbname "testdb" --data-only --verbose --schema "public" --table "table1" "C:\Users\YUSUF\Desktop\db\testdb.table1.sql"

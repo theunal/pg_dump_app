@@ -7,7 +7,10 @@
       "RelativeMoniker": "D:0:0:{895ECB6D-18A1-4D71-96C2-D421BC289F4A}|PgDump\\PgDump.csproj|solutionrelative:pgdump\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{895ECB6D-18A1-4D71-96C2-D421BC289F4A}|PgDump\\PgDump.csproj|c:\\users\\yusuf\\desktop\\pg_dump_app\\pgdump\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\YUSUF\\AppData\\Local\\SourceServer\\d3376efd179166fa9d7dd7d0a7d76143faf642e18b22d8e0e82450230f99bd1f\\PgDump\\Form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{895ECB6D-18A1-4D71-96C2-D421BC289F4A}|PgDump\\PgDump.csproj|C:\\Users\\YUSUF\\Desktop\\pg_dump_app\\pgdump\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form",
       "RelativeMoniker": "D:0:0:{895ECB6D-18A1-4D71-96C2-D421BC289F4A}|PgDump\\PgDump.csproj|solutionrelative:pgdump\\form1.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}|Form"
     }
   ],
@@ -18,11 +21,24 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "Form1.cs",
+              "DocumentMoniker": "C:\\Users\\YUSUF\\AppData\\Local\\SourceServer\\d3376efd179166fa9d7dd7d0a7d76143faf642e18b22d8e0e82450230f99bd1f\\PgDump\\Form1.cs",
+              "RelativeDocumentMoniker": "..\\..\\AppData\\Local\\SourceServer\\d3376efd179166fa9d7dd7d0a7d76143faf642e18b22d8e0e82450230f99bd1f\\PgDump\\Form1.cs",
+              "ToolTip": "C:\\Users\\YUSUF\\AppData\\Local\\SourceServer\\d3376efd179166fa9d7dd7d0a7d76143faf642e18b22d8e0e82450230f99bd1f\\PgDump\\Form1.cs [Read Only]",
+              "RelativeToolTip": "..\\..\\AppData\\Local\\SourceServer\\d3376efd179166fa9d7dd7d0a7d76143faf642e18b22d8e0e82450230f99bd1f\\PgDump\\Form1.cs [Read Only]",
+              "ViewState": "AQIAADEAAAAAAAAAAAAiwEcAAAAYAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-08-01T04:05:15.282Z",
+              "EditorCaption": " [Read Only]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
               "Title": "Form1.cs [Design]",
               "DocumentMoniker": "C:\\Users\\YUSUF\\Desktop\\pg_dump_app\\PgDump\\Form1.cs",
               "RelativeDocumentMoniker": "PgDump\\Form1.cs",
@@ -40,7 +56,7 @@
               "RelativeDocumentMoniker": "PgDump\\Form1.cs",
               "ToolTip": "C:\\Users\\YUSUF\\Desktop\\pg_dump_app\\PgDump\\Form1.cs",
               "RelativeToolTip": "PgDump\\Form1.cs",
-              "ViewState": "AQIAADQAAAAAAAAAAAAUwE0AAAAVAAAA",
+              "ViewState": "AQIAAFAAAAAAAAAAAAAUwG0AAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2024-07-31T20:59:38.291Z",
               "EditorCaption": ""
